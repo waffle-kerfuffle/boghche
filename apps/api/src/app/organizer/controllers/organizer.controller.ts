@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { Organizer } from '../dto/out/organizer.out';
 
 @Controller('organizer')
@@ -100,5 +100,10 @@ export class OrganizerController {
     return this.organizers;
   }
 
+  @Get('find')
+  find(@Query('id') organizerId:number) {
+    return this.organizers.filter(org => org.id == organizerId)
+  }
+  
 
 }
