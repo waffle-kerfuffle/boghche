@@ -18,36 +18,36 @@ export class OrganizerController {
       ],
       rating: 1.5,
       tours: [
-        {
-          id: 0,
-          dateCreated: new Date(),
-          title: 'جزایر لانگر هاوس',
-          description: 'نزدیکی های کبد',
-          bannerUrl: 'https://picsum.photos/200/300',
-          galleryUrls: ['https://picsum.photos/200/200', 'https://picsum.photos/200/350', 'https://picsum.photos/200/600'],
-          /** مدت زمان */
-          duration: new Date(),
-          price: 150000,
-          capacity: 15,
-          /** امتیاز ها */
-          ratings: 4.5,
-          comments: [],
-        },
-        {
-          id: 1,
-          dateCreated: new Date(),
-          title: 'پاتایا',
-          description: 'پاشو بریم پاتایا',
-          bannerUrl: 'https://picsum.photos/200/400',
-          galleryUrls: ['https://picsum.photos/200/190'],
-          /** مدت زمان */
-          duration: new Date(),
-          price: 169000,
-          capacity: 2,
-          /** امتیاز ها */
-          ratings: 4.3,
-          comments: [],
-        },
+        // {
+        //   id: 0,
+        //   dateCreated: new Date(),
+        //   title: 'جزایر لانگر هاوس',
+        //   description: 'نزدیکی های کبد',
+        //   bannerUrl: 'https://picsum.photos/200/300',
+        //   galleryUrls: ['https://picsum.photos/200/200', 'https://picsum.photos/200/350', 'https://picsum.photos/200/600'],
+        //   /** مدت زمان */
+        //   duration: new Date(),
+        //   price: 150000,
+        //   capacity: 15,
+        //   /** امتیاز ها */
+        //   ratings: 4.5,
+        //   comments: [],
+        // },
+        // {
+        //   id: 1,
+        //   dateCreated: new Date(),
+        //   title: 'پاتایا',
+        //   description: 'پاشو بریم پاتایا',
+        //   bannerUrl: 'https://picsum.photos/200/400',
+        //   galleryUrls: ['https://picsum.photos/200/190'],
+        //   /** مدت زمان */
+        //   duration: new Date(),
+        //   price: 169000,
+        //   capacity: 2,
+        //   /** امتیاز ها */
+        //   ratings: 4.3,
+        //   comments: [],
+        // },
       ]
     },
     {
@@ -61,21 +61,21 @@ export class OrganizerController {
       ],
       rating: 1.9,
       tours: [
-        {
-          id: 2,
-          dateCreated: new Date(),
-          title: 'پاتایا',
-          description: 'پاشو بریم پاتایا',
-          bannerUrl: 'https://picsum.photos/200/400',
-          galleryUrls: ['https://picsum.photos/200/190'],
-          /** مدت زمان */
-          duration: new Date(),
-          price: 175000,
-          capacity: 2,
-          /** امتیاز ها */
-          ratings: 4.3,
-          comments: [],
-        },
+        // {
+        //   id: 2,
+        //   dateCreated: new Date(),
+        //   title: 'پاتایا',
+        //   description: 'پاشو بریم پاتایا',
+        //   bannerUrl: 'https://picsum.photos/200/400',
+        //   galleryUrls: ['https://picsum.photos/200/190'],
+        //   /** مدت زمان */
+        //   duration: new Date(),
+        //   price: 175000,
+        //   capacity: 2,
+        //   /** امتیاز ها */
+        //   ratings: 4.3,
+        //   comments: [],
+        // },
       ]
     },
     {

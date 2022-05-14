@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { Tour } from '../dto/out/tour.out';
 
 @Controller('tour')
 export class TourController {

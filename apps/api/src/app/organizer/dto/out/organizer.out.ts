@@ -1,3 +1,5 @@
+import { Tour } from "../../../tour/model/tour.entity"
+
 export interface Organizer {
   id: number
   name: string
