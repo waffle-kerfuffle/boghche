@@ -14,7 +14,6 @@ async function bootstrap() {
   // standard
   const app = await NestFactory.create(AppModule);
 
-
   // global prefix
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
