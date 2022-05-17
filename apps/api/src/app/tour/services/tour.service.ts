@@ -5,7 +5,7 @@ import { CreateTourInput } from '../dto/in/createTour.in';
 import { DeleteTourInput } from '../dto/in/deleteTour.in';
 import { FindTourInput } from '../dto/in/findTour.in';
 import { UpdateTourInput } from '../dto/in/updateTour.in';
-import { Tour } from '../model/tour.entity';
+import { Tour } from '../models/tour.entity';
 
 @Injectable()
 export class TourService {

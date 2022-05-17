@@ -1,4 +1,4 @@
-import { Tour } from "../../../tour/model/tour.entity"
+import { Tour } from "../../../tour/models/tour.entity"
 
 export interface Organizer {
   id: number

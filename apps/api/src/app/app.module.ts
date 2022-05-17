@@ -5,6 +5,7 @@ import { ConfigModule  } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { OrganizerModule } from './organizer/organizer.module';
 import { TourModule } from './tour/tour.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { TourModule } from './tour/tour.module';
       synchronize: true,
     }),
     TourModule,
-    OrganizerModule
+    OrganizerModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [],
