@@ -17,14 +17,12 @@ export class TourService {
 
   async createTour(createTourData: CreateTourInput): Promise<Tour> {
 
-    const newTour: Tour = {
-      ...createTourData,
-      dateCreated: new Date(),
-      galleryUrls: [],
-      bannerUrl: null,
-
+    const newTour = {
+      ...new Tour(),
+      ...createTourData
     }
-    const tour = await this.tourRepo.save(createTourData);
+    
+    const tour = await this.tourRepo.save(newTour);
     return tour;
 
     // const tour: Tour = { tourId: uuidv4(), ...createTourData };

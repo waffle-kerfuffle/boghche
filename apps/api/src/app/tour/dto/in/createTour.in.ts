@@ -1,15 +1,18 @@
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 
 export class CreateTourInput {
   
   @ApiProperty()
   title: string
   
-  @ApiProperty()
+  @ApiPropertyOptional()
   description: string
   
-  @ApiProperty()
+  @ApiPropertyOptional()
   bannerUrl: string
+
+  @ApiPropertyOptional()
+  galleryUrls: string[] 
   
   /** مدت زمان */
   @ApiProperty()

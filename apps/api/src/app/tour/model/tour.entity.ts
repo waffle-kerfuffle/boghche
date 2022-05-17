@@ -1,24 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class Tour extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
-  dateCreated: Date
+  @CreateDateColumn()
+  dateCreated: Date = new Date()
   
   @Column()
   title: string
   
-  @Column()
-  description: string
+  @Column({ nullable: true })
+  description: string = undefined
   
-  @Column()
-  bannerUrl: string
+  @Column({ nullable: true })
+  bannerUrl: string = undefined
   
-  @Column("simple-array", { array: true })
-  galleryUrls: string[]
+  @Column("simple-array", { array: false })
+  galleryUrls: string[] = []
   
   /** مدت زمان */
   @Column()
@@ -32,8 +32,9 @@ export class Tour extends BaseEntity {
   
   /** امتیاز ها */
   @Column()
-  ratings: number
+  ratings: number = 0
   
   // @Column()
   // comments: Comment[]
 }
+
