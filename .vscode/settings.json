@@ -12,6 +12,9 @@
     "app[!s]*/**": true,
     "apps/[!a]*/**": true,
     "apps/a[!p]*/**": true,
-    "apps/ap[!i]*/**": true
+    "apps/ap[!i]*/**": true,
+    "apps/api/[!s]*/**": true,
+    "apps/api/s[!r]*/**": true,
+    "apps/api/sr[!c]*/**": true
   }
 }

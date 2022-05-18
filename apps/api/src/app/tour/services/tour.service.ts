@@ -15,6 +15,8 @@ export class TourService {
     private tourRepo: Repository<Tour>
   ) { }
 
+  // #region CRUD
+
   async createTour(createTourData: CreateTourInput): Promise<Tour> {
 
     const newTour = {
@@ -24,10 +26,6 @@ export class TourService {
     
     const tour = await this.tourRepo.save(newTour);
     return tour;
-
-    // const tour: Tour = { tourId: uuidv4(), ...createTourData };
-    // this.tours.push(tour);
-    // return tour;
   }
 
   async updateTour(updateTourData: UpdateTourInput): Promise<Tour> {
@@ -38,10 +36,6 @@ export class TourService {
     if(!tour) throw new NotFoundException(tour,'a tour with the specified [id] was not found');
 
     return tour;
-
-    // const tour = this.tours.find(tour => tour.tourId === updateTourData.tourId);
-    // Object.assign(tour, updateTourData);
-    // return tour;
   }
 
   async getAllTours(): Promise<Tour[]> {
@@ -52,17 +46,11 @@ export class TourService {
 
     const tour = await this.tourRepo.findOne(findTourArgs);
     return tour;
-
-    // const tour = this.tours.find(tour => tour.tourId === getTourArgs.tourId);
-    // return tour;
   }
 
-  async findTours(findTourArgs: FindTourInput): Promise<Tour[]> {
+  async searchTours(findTourArgs: FindTourInput): Promise<Tour[]> {
 
     return await this.tourRepo.find(findTourArgs);
-
-    // const tours = getToursArgs.tourIds.map(tourId => this.getTour({ tourId }));
-    // return tours;
   }
 
   async deleteTour(deleteTourData: DeleteTourInput): Promise<DeleteResult> {
@@ -72,14 +60,9 @@ export class TourService {
     const res = await this.tourRepo.delete(tour);
 
     return res;
-
-    // const tourIndex = this.tours.findIndex(tour => tour.tourId === deleteTourData.tourId);
-
-    // const deletedTour = this.tours[tourIndex];
-
-    // this.tours.splice(tourIndex);
-
-    // return deletedTour;
   }
 
+  // #endregion CRUD
+
+  
 }

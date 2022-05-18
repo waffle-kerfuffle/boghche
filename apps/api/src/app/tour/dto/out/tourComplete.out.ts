@@ -1,4 +1,4 @@
-export interface Tour {
+export class TourComplete {
   id: number
   dateCreated: Date
   title: string
@@ -11,5 +11,5 @@ export interface Tour {
   capacity: number
   /** امتیاز ها */
   ratings: number
-  comments: Comment[]
+  // comments: Comment[]
 }
