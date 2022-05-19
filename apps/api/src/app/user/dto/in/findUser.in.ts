@@ -3,18 +3,18 @@ import { ApiPropertyOptional } from "@nestjs/swagger"
 export class FindUserInput {
 
   @ApiPropertyOptional()
-  id: number
+  id?: number
 
   @ApiPropertyOptional()
-  name: string
+  name?: string
 
   @ApiPropertyOptional()
-  pass: string
+  pass?: string
   
   @ApiPropertyOptional()
-  avatarUrl: string
-
+  telno?: string
+  
   @ApiPropertyOptional()
-  telno: string
+  avatarUrl?: string
   
 }

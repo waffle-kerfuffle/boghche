@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 
-export class CreateUserInput {
+export class SignupInput {
 
   @ApiProperty()
   name: string
@@ -13,7 +13,5 @@ export class CreateUserInput {
 
   @ApiPropertyOptional()
   avatarUrl: string
-
-  // <- File Uploaded seperately
 
 }

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Redirect } from '@nestjs/common';
 
 @Controller()
 export class AppController {
@@ -6,6 +6,7 @@ export class AppController {
   constructor() { }
 
   @Get()
+  @Redirect('/api')
   index() {
     return 'welcome'
   }

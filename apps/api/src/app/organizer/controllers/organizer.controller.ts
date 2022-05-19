@@ -1,6 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Organizer } from '../dto/out/organizer.out';
 
+@ApiTags('organizer')
 @Controller('organizer')
 export class OrganizerController {
 
