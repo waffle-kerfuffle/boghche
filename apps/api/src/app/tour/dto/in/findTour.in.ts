@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
+import { ApprovalStatus } from "../../models/approvalStatus"
 
 export class FindTourInput {
   
@@ -23,4 +24,8 @@ export class FindTourInput {
   
   @ApiPropertyOptional()
   capacity: number
+  
+  @ApiPropertyOptional()
+  approvalStatus: ApprovalStatus
+  
 }
