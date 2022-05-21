@@ -5,7 +5,7 @@ import { CreateUserInput } from "../dto/in/createUser.int";
 import { DeleteUserInput } from "../dto/in/deleteUser.in";
 import { FindUserInput } from "../dto/in/findUser.in";
 import { UpdateUserInput } from "../dto/in/updateUser.in";
-import { User } from "../models/user";
+import { User } from "../models/user.entity";
 
 @Injectable()
 export class UserService {

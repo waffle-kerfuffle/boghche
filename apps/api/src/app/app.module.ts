@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { OrganizerModule } from './organizer/organizer.module';
 import { TourModule } from './tour/tour.module';
 import { UserModule } from './user/user.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { UserModule } from './user/user.module';
     }),
     TourModule,
     OrganizerModule,
-    UserModule
+    UserModule,
+    ChatModule
   ],
   controllers: [AppController],
   providers: [],

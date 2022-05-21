@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AccountController } from "./controllers/account.controller";
 import { UserController } from "./controllers/user.controller";
-import { User } from "./models/user";
+import { User } from "./models/user.entity";
 import { AccountService } from "./services/account.service";
 import { UserService } from "./services/user.service";
 

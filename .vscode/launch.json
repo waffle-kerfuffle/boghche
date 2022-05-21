@@ -21,6 +21,7 @@
             "NODE_PORT": "8000",
             "TS_NODE_PROJECT": "apps/api/tsconfig.app.json", // Specify the tsconfig to use
           },
+          "envFile": "${workspaceFolder}/apps/api/.env",
           "sourceMaps": true,
           "console": "internalConsole",
           "outputCapture": "std",

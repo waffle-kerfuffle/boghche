@@ -5,13 +5,6 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/Thumbs.db": true,
-    "[!a]*/**": true,
-    "a[!p]*/**": true,
-    "ap[!p]*/**": true,
-    "app[!s]*/**": true,
-    "apps/[!a]*/**": true,
-    "apps/a[!p]*/**": true,
-    "apps/ap[!i]*/**": true
+    "**/Thumbs.db": true
   }
 }

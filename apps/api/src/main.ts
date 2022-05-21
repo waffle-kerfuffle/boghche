@@ -31,6 +31,9 @@ async function bootstrap() {
   
   SwaggerModule.setup(globalPrefix, app, document, { customCssUrl: '/styles/swagger-dark.css' });
   
+  // cors
+  app.enableCors();
+  
   // run server
   const port = process.env.PORT || 3333;
   await app.listen(port);
