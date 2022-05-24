@@ -1,6 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, ManyToOne, OneToMany, ManyToMany } from 'typeorm';
 import { Organizer } from '../../organizer/model/organizer.entity';
-import { Photo } from '../../organizer/model/photo.entity';
+import { Place } from '../../place/models/place.entity';
+import { Like } from '../../rating/models/like.entity';
+import { Opinion } from '../../rating/models/opinion.entity';
+import { Rating } from '../../rating/models/rating.entity';
+import { Photo } from '../../upload/models/photo.entity';
 import { User } from '../../user/models/user.entity';
 import { ApprovalStatus } from './approvalStatus';
 import { DestinationType } from './DestinationType';
@@ -65,12 +69,12 @@ export class Tour extends BaseEntity {
   
   /** امتیاز ها */
   @OneToMany(() => Rating, rating => rating.tour)
-  ratings: Like[] = []
+  ratings: Rating[] = []
 
   @OneToMany(() => Like, like => like.tour)
   likes: Like[] = []
 
-  @OneToMany(() => Opinion, opinion => opinion.user)
+  @OneToMany(() => Opinion, opinion => opinion.author)
   comments: Opinion[] = []
 
   /** گالری */

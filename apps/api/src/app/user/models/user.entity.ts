@@ -1,6 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm';
-import { Photo } from '../../organizer/model/photo.entity';
+import { Photo } from '../../upload/models/photo.entity';
+import { Opinion } from '../../rating/models/opinion.entity';
 import { Role } from './role.enum';
+import { Like } from '../../rating/models/like.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -28,6 +30,11 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Photo, (photo) => photo.organizer)
   gallery: Photo[]
-  
-  
+
+  @OneToMany(() => Opinion, opinion => opinion.author)
+  authoredComments: Opinion[] = []
+
+  @OneToMany(() => Like, like => like.author)
+  authoredLikes: Like[] = []
+
 }
