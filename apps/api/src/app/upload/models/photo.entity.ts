@@ -12,8 +12,8 @@ export class Photo extends BaseEntity {
   @Column()
   url: string
 
-  @Column()
-  caption: string
+  @Column({ nullable: true })
+  caption?: string
 
   @CreateDateColumn()
   dateCreated: Date

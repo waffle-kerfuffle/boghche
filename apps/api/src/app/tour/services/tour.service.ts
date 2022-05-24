@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import { OrganizerService } from '../../organizer/services/organizer.service';
 import { CreateTourInput } from '../dto/in/createTour.in';
 import { DeleteTourInput } from '../dto/in/deleteTour.in';
 import { FindTourInput } from '../dto/in/findTour.in';
@@ -12,28 +13,28 @@ export class TourService {
 
   constructor(
     @InjectRepository(Tour)
-    private tourRepo: Repository<Tour>
+    private tourRepo: Repository<Tour>,
+    private organizerSv: OrganizerService
   ) { }
 
   // #region CRUD
 
   async createTour(createTourData: CreateTourInput): Promise<Tour> {
 
-    const newTour = {
-      ...new Tour(),
-      ...createTourData
-    }
-    
-    const tour = await this.tourRepo.save(newTour);
-    return tour;
+    let newTour = this.tourRepo.create(createTourData);
+    newTour.organizer = await this.organizerSv.findOrganizer({ id: createTourData.organizerId })
+
+    newTour = await newTour.save()
+
+    return newTour;
   }
 
   async updateTour(updateTourData: UpdateTourInput): Promise<Tour> {
 
     throw new NotImplementedException('update is not yet impelmented');
-    
+
     let tour = await this.tourRepo.findOne(updateTourData.id);
-    if(!tour) throw new NotFoundException(tour,'a tour with the specified [id] was not found');
+    if (!tour) throw new NotFoundException(tour, 'a tour with the specified [id] was not found');
 
     return tour;
   }
@@ -64,5 +65,5 @@ export class TourService {
 
   // #endregion CRUD
 
-  
+
 }
