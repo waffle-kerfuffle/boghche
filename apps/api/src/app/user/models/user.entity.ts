@@ -2,7 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 't
 import { Photo } from '../../upload/models/photo.entity';
 import { Opinion } from '../../rating/models/opinion.entity';
 import { Role } from './role.enum';
-import { Like } from '../../rating/models/like.entity';
+import { Rating } from '../../rating/models/rating.entity';
+import { Heart } from '../../rating/models/heart.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -32,9 +33,11 @@ export class User extends BaseEntity {
   gallery: Photo[]
 
   @OneToMany(() => Opinion, opinion => opinion.author)
-  authoredComments: Opinion[] = []
+  authoredComments: Opinion[]
 
-  @OneToMany(() => Like, like => like.author)
-  authoredLikes: Like[] = []
+  @OneToMany(() => Heart, heart => heart.author)
+  authoredLikes: Heart[] 
 
+  @OneToMany(() => Rating, rating => rating.author)
+  authoredRatings: Rating[]
 }

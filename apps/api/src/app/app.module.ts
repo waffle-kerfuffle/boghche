@@ -26,11 +26,11 @@ import { PlaceModule } from './place/place.module';
     }),
     TourModule,
     OrganizerModule,
-    UserModule,
     ChatModule,
     UploadModule,
     RatingModule,
-    PlaceModule
+    PlaceModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [],

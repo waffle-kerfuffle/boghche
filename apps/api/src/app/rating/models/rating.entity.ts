@@ -1,9 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Tour } from "../../tour/models/tour.entity";
 import { User } from "../../user/models/user.entity";
 
 @Entity()
-export class Rating {
+export class Rating extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id: number

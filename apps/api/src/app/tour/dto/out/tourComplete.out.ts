@@ -1,15 +1,49 @@
+import { Organizer } from "../../../organizer/model/organizer.entity"
+import { Place } from "../../../place/models/place.entity"
+import { Heart } from "../../../rating/models/heart.entity"
+import { Opinion } from "../../../rating/models/opinion.entity"
+import { Rating } from "../../../rating/models/rating.entity"
+import { Photo } from "../../../upload/models/photo.entity"
+import { User } from "../../../user/models/user.entity"
+import { ApprovalStatus } from "../../models/approvalStatus"
+import { DestinationType } from "../../models/DestinationType"
+import { Tour } from "../../models/tour.entity"
+
 export class TourComplete {
   id: number
   dateCreated: Date
   title: string
-  description: string
-  bannerUrl: string
-  galleryUrls: string[]
+  caption?: string
+  description?: string
+  dispatch: Place
+  destination: Place
+  destinationType: DestinationType
+  bannerUrl?: string
   /** مدت زمان */
   duration: Date
   price: number
   capacity: number
+  approvalStatus: ApprovalStatus
+  organizer: Organizer
+  comments: Opinion[] = []
+  photos: Photo[] = []
+  atendees: User[] = []
+
   /** امتیاز ها */
-  ratings: number
-  // comments: Comment[]
+  ratings: string
+  likes: number
+
+  static fromEntity(tour: Tour): TourComplete {
+    const sumRating: number = tour.ratings.reduceRight<number>((acc, current) => acc + current.score, 0);
+    const averageRating: string = (sumRating / tour.ratings.length).toFixed(1);
+
+    const res = {
+      ...tour,
+      likes: tour.likes.length,
+      ratings: averageRating,
+    }
+
+    return res;
+  }
+
 }
