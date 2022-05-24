@@ -1,4 +1,5 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Tour } from "../../tour/models/tour.entity";
 import { User } from "../../user/models/user.entity";
 import { Organizer } from "./organizer.entity";
 
@@ -22,5 +23,8 @@ export class Photo extends BaseEntity {
 
   @ManyToOne(() => User, tourist => tourist.gallery)
   tourist: User
+
+  @ManyToOne(() => Tour, tour => tour.photos)
+  tour: Tour
 
 }

@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule  } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { OrganizerModule } from './organizer/organizer.module';
 import { TourModule } from './tour/tour.module';
 import { UserModule } from './user/user.module';
 import { ChatModule } from './chat/chat.module';
+import { UploadModule } from './upload/upload.module';
+import { RatingModule } from './rating/rating.module';
+import { PlaceModule } from './place/place.module';
 
 @Module({
   imports: [
@@ -24,7 +27,10 @@ import { ChatModule } from './chat/chat.module';
     TourModule,
     OrganizerModule,
     UserModule,
-    ChatModule
+    ChatModule,
+    UploadModule,
+    RatingModule,
+    PlaceModule
   ],
   controllers: [AppController],
   providers: [],
