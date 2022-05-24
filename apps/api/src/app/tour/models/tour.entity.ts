@@ -1,8 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Organizer } from '../../organizer/model/organizer.entity';
 import { ApprovalStatus } from './approvalStatus';
 
 @Entity()
 export class Tour extends BaseEntity {
+
   @PrimaryGeneratedColumn()
   id: number
 
@@ -40,9 +42,13 @@ export class Tour extends BaseEntity {
     enum: [0, 1, 2],
     default: 0
   })
-  approvalStatus: ApprovalStatus = 0
+  approvalStatus: ApprovalStatus = ApprovalStatus.pending;
 
-  // @Column()
+  @ManyToOne(() => Organizer, organizer => organizer.tours)
+  organizer: Organizer
+
+  // @Column()  
   // comments: Comment[]
+
 }
 

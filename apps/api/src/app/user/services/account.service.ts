@@ -80,7 +80,7 @@ export class AccountService {
   }
 
   async activateUser(user: User): Promise<User> {
-    user.roles.push(Role.User);
+    user.roles.push(Role.Tourist);
     await this.userRepo.update({ id: user.id }, { roles: user.roles });
     return user;
   }
