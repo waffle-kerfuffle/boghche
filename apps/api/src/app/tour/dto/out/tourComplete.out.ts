@@ -1,15 +1,13 @@
-import { Organizer } from "../../../organizer/model/organizer.entity"
+import { Organization } from "../../../organization/model/organization.entity"
 import { Place } from "../../../place/models/place.entity"
-import { Heart } from "../../../rating/models/heart.entity"
 import { Opinion } from "../../../rating/models/opinion.entity"
-import { Rating } from "../../../rating/models/rating.entity"
 import { Photo } from "../../../upload/models/photo.entity"
 import { User } from "../../../user/models/user.entity"
 import { ApprovalStatus } from "../../models/approvalStatus"
 import { DestinationType } from "../../models/DestinationType"
 import { Tour } from "../../models/tour.entity"
 
-export class TourComplete {
+export class TourCompleteOutput {
   id: number
   dateCreated: Date
   title: string
@@ -24,7 +22,7 @@ export class TourComplete {
   price: number
   capacity: number
   approvalStatus: ApprovalStatus
-  organizer: Organizer
+  organization: Organization
   comments: Opinion[] = []
   photos: Photo[] = []
   atendees: User[] = []
@@ -33,7 +31,7 @@ export class TourComplete {
   ratings: string
   likes: number
 
-  static fromEntity(tour: Tour): TourComplete {
+  static fromEntity(tour: Tour): TourCompleteOutput {
     const sumRating: number = tour.ratings.reduceRight<number>((acc, current) => acc + current.score, 0);
     const averageRating: string = (sumRating / tour.ratings.length).toFixed(1);
 

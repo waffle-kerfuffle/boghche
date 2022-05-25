@@ -1,5 +1,6 @@
 export enum Role {
   Tourist = "tourist",
-  Organizer = "organizer",
+  Leader = "leader",
+  Organization = "organization",
   Admin = "admin",
 }

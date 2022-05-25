@@ -40,7 +40,7 @@ export class AccountController {
 
   @Post('attemptTelno')
   async attemptTelno(@Body() attemptTelnoArgs: AttemptTelnoInput) {
-    const attempt = this.accountSv.attemptTelno(attemptTelnoArgs);
+    const attempt = await this.accountSv.attemptTelno(attemptTelnoArgs);
     if (!attempt) return "Invalid confirmation credentials";
 
     let user = await this.userSv.findUser({ telno: attemptTelnoArgs.telno });

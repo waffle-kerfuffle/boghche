@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
-import { OrganizerModule } from './organizer/organizer.module';
+import { OrganizationModule } from './organization/organization.module';
 import { TourModule } from './tour/tour.module';
 import { UserModule } from './user/user.module';
 import { ChatModule } from './chat/chat.module';
@@ -25,7 +25,7 @@ import { PlaceModule } from './place/place.module';
       synchronize: true,
     }),
     TourModule,
-    OrganizerModule,
+    OrganizationModule,
     ChatModule,
     UploadModule,
     RatingModule,

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
-import { OrganizerService } from '../../organizer/services/organizer.service';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { OrganizationService } from '../../organization/services/organization.service';
 import { CreateTourInput } from '../dto/in/createTour.in';
 import { DeleteTourInput } from '../dto/in/deleteTour.in';
 import { FindTourInput } from '../dto/in/findTour.in';
@@ -14,7 +14,7 @@ export class TourService {
   constructor(
     @InjectRepository(Tour)
     private tourRepo: Repository<Tour>,
-    private organizerSv: OrganizerService
+    private organizationSv: OrganizationService
   ) { }
 
   // #region CRUD
@@ -22,25 +22,22 @@ export class TourService {
   async createTour(createTourData: CreateTourInput): Promise<Tour> {
 
     let newTour = this.tourRepo.create(createTourData);
-    newTour.organizer = await this.organizerSv.findOrganizer({ id: createTourData.organizerId })
+    newTour.organization = await this.organizationSv.findOrganization({ id: createTourData.organizationId })
 
     newTour = await newTour.save()
-
     return newTour;
   }
 
-  async updateTour(updateTourData: UpdateTourInput): Promise<Tour> {
+  async updateTour({ id, ...overrides }: UpdateTourInput): Promise<UpdateResult> {
 
-    throw new NotImplementedException('update is not yet impelmented');
-
-    let tour = await this.tourRepo.findOne(updateTourData.id);
-    if (!tour) throw new NotFoundException(tour, 'a tour with the specified [id] was not found');
-
-    return tour;
+    const res = await this.tourRepo.update({ id }, overrides);
+    return res;
   }
 
   async getAllTours(): Promise<Tour[]> {
-    return await this.tourRepo.find();
+    
+    const tour = await this.tourRepo.find();
+    return tour;
   }
 
   async findTour(findTourArgs: FindTourInput): Promise<Tour> {
@@ -51,15 +48,13 @@ export class TourService {
 
   async searchTours(findTourArgs: FindTourInput): Promise<Tour[]> {
 
-    return await this.tourRepo.find(findTourArgs);
+    const tours = await this.tourRepo.find(findTourArgs);
+    return tours;
   }
 
-  async deleteTour(deleteTourData: DeleteTourInput): Promise<DeleteResult> {
+  async deleteTour({ id }: DeleteTourInput): Promise<DeleteResult> {
 
-    const tour = await this.tourRepo.findOne(deleteTourData);
-
-    const res = await this.tourRepo.delete(tour);
-
+    const res = await this.tourRepo.delete({ id });
     return res;
   }
 

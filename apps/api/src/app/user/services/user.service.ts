@@ -1,6 +1,6 @@
 import { Injectable, NotImplementedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { DeleteResult, Repository } from "typeorm";
+import { DeleteResult, Repository, UpdateResult } from "typeorm";
 import { CreateUserInput } from "../dto/in/createUser.int";
 import { DeleteUserInput } from "../dto/in/deleteUser.in";
 import { FindUserInput } from "../dto/in/findUser.in";
@@ -29,24 +29,30 @@ export class UserService {
     return user;
   }
 
-  async updateUser(updateUserData: UpdateUserInput): Promise<User> {
-    throw new NotImplementedException();
+  async updateUser({ id, ...overrides }: UpdateUserInput): Promise<UpdateResult> {
+    
+    const res = await this.userRepo.update({ id }, overrides);
+    return res;
   }
 
   async getAllUsers(): Promise<User[]> {
-    return await this.userRepo.find();
+    const user = await this.userRepo.find();
+    return user;
   }
 
   async findUser(findUserArgs: FindUserInput): Promise<User> {
-    return await this.userRepo.findOne(findUserArgs);
+    const user = await this.userRepo.findOne(findUserArgs);
+    return user;
   }
 
   async searchUsers(findUsersArgs: FindUserInput): Promise<User[]> {
-    return await this.userRepo.find(findUsersArgs);
+    const users = await this.userRepo.find(findUsersArgs);
+    return users;
   }
 
-  async deleteUser(deleteUserArgs: DeleteUserInput): Promise<DeleteResult> {
-    return await this.userRepo.delete(deleteUserArgs);
+  async deleteUser({ id }: DeleteUserInput): Promise<DeleteResult> {
+    const res = await this.userRepo.delete({ id });
+    return res;
   }
 
   // #endregion CRUD

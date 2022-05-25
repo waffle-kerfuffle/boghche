@@ -6,7 +6,7 @@
           "type": "pwa-node",
           "request": "launch",
           "args": [
-            "apps/api/src/index.js"
+            "apps/api/src/main.ts"
           ],
           "runtimeArgs": [
             "--require",

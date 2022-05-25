@@ -43,6 +43,6 @@ export class CreateTourInput {
   approvalStatus: ApprovalStatus = ApprovalStatus.pending
 
   @ApiProperty()
-  organizerId: number
+  organizationId: number
 
 }

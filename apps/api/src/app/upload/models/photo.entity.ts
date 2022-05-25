@@ -1,7 +1,7 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Tour } from "../../tour/models/tour.entity";
 import { User } from "../../user/models/user.entity";
-import { Organizer } from "../../organizer/model/organizer.entity";
+import { Organization } from "../../organization/model/organization.entity";
 
 @Entity()
 export class Photo extends BaseEntity {
@@ -18,8 +18,8 @@ export class Photo extends BaseEntity {
   @CreateDateColumn()
   dateCreated: Date
 
-  @ManyToOne(() => Organizer, organizer => organizer.gallery, { nullable: true })
-  organizer: Organizer
+  @ManyToOne(() => Organization, organization => organization.gallery, { nullable: true })
+  organization: Organization
 
   @ManyToOne(() => User, tourist => tourist.gallery, { nullable: true })
   tourist: User

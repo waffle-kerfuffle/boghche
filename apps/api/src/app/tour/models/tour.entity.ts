@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, ManyToOne, OneToMany, ManyToMany, OneToOne, JoinTable } from 'typeorm';
-import { Organizer } from '../../organizer/model/organizer.entity';
+import { Organization } from '../../organization/model/organization.entity';
 import { Place } from '../../place/models/place.entity';
 import { Heart } from '../../rating/models/heart.entity';
 import { Opinion } from '../../rating/models/opinion.entity';
@@ -66,8 +66,8 @@ export class Tour extends BaseEntity {
   approvalStatus: ApprovalStatus = ApprovalStatus.pending;
 
   /** برپا کننده */
-  @ManyToOne(() => Organizer, organizer => organizer.tours)
-  organizer: Organizer
+  @ManyToOne(() => Organization, organization => organization.tours)
+  organization: Organization
 
   /** امتیاز ها */
   @OneToMany(() => Rating, rating => rating.tour)

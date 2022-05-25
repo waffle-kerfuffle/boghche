@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, ManyToOne } from 'typeorm';
 import { Photo } from '../../upload/models/photo.entity';
 import { Opinion } from '../../rating/models/opinion.entity';
 import { Role } from './role.enum';
 import { Rating } from '../../rating/models/rating.entity';
 import { Heart } from '../../rating/models/heart.entity';
+import { Organization } from '../../organization/model/organization.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -29,7 +30,7 @@ export class User extends BaseEntity {
   @Column('simple-array', { default: [] })
   roles: Role[] = []
 
-  @OneToMany(() => Photo, (photo) => photo.organizer)
+  @OneToMany(() => Photo, (photo) => photo.organization)
   gallery: Photo[]
 
   @OneToMany(() => Opinion, opinion => opinion.author)
@@ -40,4 +41,8 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Rating, rating => rating.author)
   authoredRatings: Rating[]
+
+  @ManyToOne(() => Organization, organization => organization.leaders)
+  organization: Organization
+  
 }

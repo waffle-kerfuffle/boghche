@@ -35,7 +35,7 @@ export class AccountService {
     const { telno } = signupData;
     const user = await this.userSv.findUser({ telno });
 
-    if (user.hasId()) throw "User is already registered";
+    if (user) throw "User is already registered";
 
     const createdUser = await this.userSv.createUser(signupData);
 
@@ -73,8 +73,8 @@ export class AccountService {
     // maybe log into database
     // this.confirmSmsRequests[reqindex].wasSuccessful = true;
 
-    // delete record from memory
-    this.confirmSmsRequests.splice(reqindex, 1);
+    // delete attempts assoicated with the confirmed request
+    this.confirmSmsRequests = this.confirmSmsRequests.filter(req => req.telno !== telno);
 
     return true;
   }

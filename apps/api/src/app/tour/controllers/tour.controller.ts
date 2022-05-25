@@ -4,8 +4,8 @@ import { DeleteResult } from 'typeorm';
 import { CreateTourInput } from '../dto/in/createTour.in';
 import { DeleteTourInput } from '../dto/in/deleteTour.in';
 import { FindTourInput } from '../dto/in/findTour.in';
-import { TourComplete } from '../dto/out/tourComplete.out';
-import { TourListView } from '../dto/out/tourListview.out';
+import { TourCompleteOutput } from '../dto/out/tourComplete.out';
+import { TourListOutput } from '../dto/out/tourListview.out';
 import { Tour } from '../models/tour.entity';
 import { TourService } from '../services/tour.service';
 
@@ -20,34 +20,34 @@ export class TourController {
   // #region CRUD
 
   @Get('list')
-  async getAllTours(): Promise<TourListView[]> {
+  async getAllTours(): Promise<TourListOutput[]> {
     const tours: Tour[] = await this.tourSv.getAllTours();
 
-    const res: TourListView[] = tours.map(tour => TourListView.fromEntity(tour));
+    const res: TourListOutput[] = tours.map(tour => TourListOutput.fromEntity(tour));
     return res;
   }
 
   @Post('find')
-  async findTour(@Body() findTourArgs: FindTourInput): Promise<TourComplete> {
+  async findTour(@Body() findTourArgs: FindTourInput): Promise<TourCompleteOutput> {
     const tour = await this.tourSv.findTour(findTourArgs);
 
-    const res: TourComplete = TourComplete.fromEntity(tour);
+    const res: TourCompleteOutput = TourCompleteOutput.fromEntity(tour);
     return res;
   }
 
   @Post('search')
-  async searchTours(@Body() findTOurArgs: FindTourInput): Promise<TourComplete[]> {
+  async searchTours(@Body() findTOurArgs: FindTourInput): Promise<TourCompleteOutput[]> {
     const tours = await this.tourSv.searchTours(findTOurArgs);
 
-    const res: TourComplete[] =  tours.map(tour => TourComplete.fromEntity(tour));
+    const res: TourCompleteOutput[] = tours.map(tour => TourCompleteOutput.fromEntity(tour));
     return res;
   }
 
   @Post('create')
-  async createTour(@Body() createTourData: CreateTourInput): Promise<TourComplete> {
+  async createTour(@Body() createTourData: CreateTourInput): Promise<TourCompleteOutput> {
     const tour = await this.tourSv.createTour(createTourData);
 
-    const res: TourComplete = TourComplete.fromEntity(tour);
+    const res: TourCompleteOutput = TourCompleteOutput.fromEntity(tour);
     return res;
   }
 
