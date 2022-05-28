@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, ManyToOne, AfterLoad } from 'typeorm';
 import { Photo } from '../../upload/models/photo.entity';
 import { Opinion } from '../../rating/models/opinion.entity';
 import { Role } from './role.enum';
@@ -42,7 +42,15 @@ export class User extends BaseEntity {
   @OneToMany(() => Rating, rating => rating.author)
   authoredRatings: Rating[]
 
-  @ManyToOne(() => Organization, organization => organization.leaders)
-  organization: Organization
+  @ManyToOne(() => Organization, organization => organization.leaders, { nullable: true })
+  organization?: Organization
+  
+  @AfterLoad()
+  nullchecks() {
+    this.authoredRatings ??= [];
+    this.authoredLikes ??= [];
+    this.authoredComments ??= [];
+    this.gallery ??= [];
+  }
   
 }

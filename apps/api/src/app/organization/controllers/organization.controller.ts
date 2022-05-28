@@ -39,13 +39,14 @@ export class OrganizationController {
   async searchOrganizations(@Body() findTOurArgs: FindOrganizationInput): Promise<OrganizationCompleteOutput[]> {
     const organizations = await this.organizationSv.searchOrganizations(findTOurArgs);
 
-    const res: OrganizationCompleteOutput[] =  organizations.map(organization => OrganizationCompleteOutput.fromEntity(organization));
+    const res: OrganizationCompleteOutput[] = organizations.map(organization => OrganizationCompleteOutput.fromEntity(organization));
     return res;
   }
 
   @Post('create')
-  async createOrganization(@Body() createOrganizationData: CreateOrganizationInput): Promise<OrganizationCompleteOutput> {
-    const organization = await this.organizationSv.createOrganization(createOrganizationData);
+  async createOrganization(@Body() { leaderId, ...organizationData }: CreateOrganizationInput): Promise<OrganizationCompleteOutput> {
+    const organization = await this.organizationSv.createOrganization({ ...organizationData, leaderId }, leaderId);
+    //                                                                                       ^^^^^^^^ will be deleted when sessions are implemented
 
     const res: OrganizationCompleteOutput = OrganizationCompleteOutput.fromEntity(organization);
     return res;

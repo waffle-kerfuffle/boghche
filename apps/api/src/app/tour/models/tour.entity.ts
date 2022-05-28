@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, ManyToOne, OneToMany, ManyToMany, OneToOne, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, ManyToOne, OneToMany, ManyToMany, OneToOne, JoinTable, AfterLoad } from 'typeorm';
 import { Organization } from '../../organization/model/organization.entity';
 import { Place } from '../../place/models/place.entity';
 import { Heart } from '../../rating/models/heart.entity';
@@ -65,27 +65,36 @@ export class Tour extends BaseEntity {
   })
   approvalStatus: ApprovalStatus = ApprovalStatus.pending;
 
-  /** برپا کننده */
+  /** شرکت */
   @ManyToOne(() => Organization, organization => organization.tours)
   organization: Organization
 
   /** امتیاز ها */
-  @OneToMany(() => Rating, rating => rating.tour)
+  @OneToMany(() => Rating, rating => rating.tour, { nullable: true })
   ratings: Rating[]
 
-  @OneToMany(() => Heart, heart => heart.tour)
+  @OneToMany(() => Heart, heart => heart.tour, { nullable: true })
   likes: Heart[]
 
-  @OneToMany(() => Opinion, opinion => opinion.author)
+  @OneToMany(() => Opinion, opinion => opinion.author, { nullable: true })
   comments: Opinion[]
 
   /** گالری */
-  @OneToMany(() => Photo, photo => photo.tour)
+  @OneToMany(() => Photo, photo => photo.tour, { nullable: true })
   photos: Photo[]
 
   /** اعضا */
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { nullable: true })
   atendees: User[]
 
+  @AfterLoad()
+  nullchecks() {
+    this.atendees ??= [];
+    this.photos ??= [];
+    this.comments ??= [];
+    this.likes ??= [];
+    this.ratings ??= [];
+  }
+  
 }
 

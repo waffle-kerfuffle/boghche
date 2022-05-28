@@ -25,7 +25,7 @@ export class FindTourInput {
   @ApiPropertyOptional()
   capacity: number
   
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ default: ApprovalStatus.pending })
   approvalStatus: ApprovalStatus
   
 }

@@ -23,21 +23,26 @@ export class TourCompleteOutput {
   capacity: number
   approvalStatus: ApprovalStatus
   organization: Organization
+
   comments: Opinion[] = []
   photos: Photo[] = []
   atendees: User[] = []
 
   /** امتیاز ها */
   ratings: string
-  likes: number
+  likeCount: number
 
   static fromEntity(tour: Tour): TourCompleteOutput {
-    const sumRating: number = tour.ratings.reduceRight<number>((acc, current) => acc + current.score, 0);
-    const averageRating: string = (sumRating / tour.ratings.length).toFixed(1);
 
-    const res = {
+    const sumRating: number = tour.ratings.reduceRight<number>((acc, current) => acc + current.score, 0);
+    const averageRating: string = (sumRating / (tour.ratings.length || 1)).toFixed(1);
+
+    const likeCount: number = tour.likes.length;
+    delete tour.likes;
+
+    const res: TourCompleteOutput = { 
       ...tour,
-      likes: tour.likes.length,
+      likeCount,
       ratings: averageRating,
     }
 

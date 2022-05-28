@@ -1,21 +1,28 @@
 import { Tour } from "../../../tour/models/tour.entity"
+import { Photo } from "../../../upload/models/photo.entity"
+import { User } from "../../../user/models/user.entity"
 import { Organization } from "../../model/organization.entity"
 
 export class OrganizationCompleteOutput {
 
   id: number
-  name: string
+  organizationName: string
   logoUrl: string
-  bio: string
-  gallery: string[]
+  description: string
+  gallery: Photo[]
   tours: Tour[]
-  rating: number
-  awards: number
+  leaders: User[]
+
+  rating: string
 
   static fromEntity(organization: Organization): OrganizationCompleteOutput {
 
+    const res: OrganizationCompleteOutput = {
+      ...organization,
+      rating: '0'
+    }
 
-    return new OrganizationCompleteOutput();
+    return res;
   }
 
 }

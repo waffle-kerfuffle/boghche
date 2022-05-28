@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, NotImplementedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
+import { UserService } from "../../user/services/user.service";
 import { CreateOrganizationInput } from "../dto/in/createOrganization.in";
 import { DeleteOrganizationInput } from "../dto/in/deleteOrganization.in";
 import { FindOrganizationInput } from "../dto/in/findOrganization.in";
@@ -13,16 +14,20 @@ export class OrganizationService {
   constructor(
     @InjectRepository(Organization)
     private organizationRepo: Repository<Organization>,
-
+    private userSv: UserService
   ) { }
 
   // #region CRUD
 
-  async createOrganization(createOrganizationData: CreateOrganizationInput): Promise<Organization> {
+  async createOrganization(createOrganizationData: CreateOrganizationInput, leaderId: number): Promise<Organization> {
+
+    let leader = await this.userSv.findUser({ id: leaderId });
+    if (!leader) throw `No user with the specified [id: ${leaderId}] was found`;
 
     let newOrganization = this.organizationRepo.create(createOrganizationData);
+    newOrganization.leaders = [leader];
+    
     newOrganization = await newOrganization.save();
-
     return newOrganization;
   }
 

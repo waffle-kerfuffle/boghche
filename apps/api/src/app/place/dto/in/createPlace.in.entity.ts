@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger"
 
 export class CreatePlaceInput {
 
-  @ApiProperty()
+  @ApiProperty({ example: 'اینجا' })
   name: string
 
   @ApiProperty({ example: 33.867886 })

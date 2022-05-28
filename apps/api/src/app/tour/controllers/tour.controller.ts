@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { DeleteResult } from 'typeorm';
+import { OrganizationService } from '../../organization/services/organization.service';
 import { CreateTourInput } from '../dto/in/createTour.in';
 import { DeleteTourInput } from '../dto/in/deleteTour.in';
 import { FindTourInput } from '../dto/in/findTour.in';
@@ -14,7 +15,8 @@ import { TourService } from '../services/tour.service';
 export class TourController {
 
   constructor(
-    private tourSv: TourService
+    private tourSv: TourService,
+    private organizationSv: OrganizationService
   ) { }
 
   // #region CRUD
@@ -45,7 +47,7 @@ export class TourController {
 
   @Post('create')
   async createTour(@Body() createTourData: CreateTourInput): Promise<TourCompleteOutput> {
-    const tour = await this.tourSv.createTour(createTourData);
+    const tour = await this.tourSv.createTour(createTourData, createTourData.organizationId);
 
     const res: TourCompleteOutput = TourCompleteOutput.fromEntity(tour);
     return res;

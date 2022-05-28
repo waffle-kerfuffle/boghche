@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, FindConditions, FindManyOptions, Repository, UpdateResult } from 'typeorm';
+import { Organization } from '../../organization/model/organization.entity';
 import { OrganizationService } from '../../organization/services/organization.service';
 import { CreateTourInput } from '../dto/in/createTour.in';
 import { DeleteTourInput } from '../dto/in/deleteTour.in';
@@ -19,7 +20,10 @@ export class TourService {
 
   // #region CRUD
 
-  async createTour(createTourData: CreateTourInput): Promise<Tour> {
+  async createTour(createTourData: CreateTourInput, organizationId: number): Promise<Tour> {
+
+    const organization: Organization = await this.organizationSv.findOrganization({ id: organizationId })
+    if (!organization) throw `No organization was found with the specified [id: ${organizationId}]`;
 
     let newTour = this.tourRepo.create(createTourData);
     newTour.organization = await this.organizationSv.findOrganization({ id: createTourData.organizationId })
@@ -34,8 +38,8 @@ export class TourService {
     return res;
   }
 
-  async getAllTours(): Promise<Tour[]> {
-    
+  async getAllTours(conditions?: FindConditions<Tour>): Promise<Tour[]> {
+
     const tour = await this.tourRepo.find();
     return tour;
   }

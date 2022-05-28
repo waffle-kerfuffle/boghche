@@ -5,6 +5,19 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/Thumbs.db": true
+    "**/Thumbs.db": true,
+    "[!a]*/**": true,
+    "a[!p]*/**": true,
+    "ap[!p]*/**": true,
+    "app[!s]*/**": true,
+    "apps/[!a]*/**": true,
+    "apps/a[!p]*/**": true,
+    "apps/ap[!i]*/**": true,
+    "apps/api/[!s]*/**": true,
+    "apps/api/s[!r]*/**": true,
+    "apps/api/sr[!c]*/**": true,
+    "apps/api/src/[!a]*/**": true,
+    "apps/api/src/a[!p]*/**": true,
+    "apps/api/src/ap[!p]*/**": true
   }
 }

@@ -4,21 +4,35 @@ import { Tour } from "../../models/tour.entity"
 export class TourListOutput {
   id: number
   price: number
-  likeCount: number
   capacity: number
   dateCreated: Date
-  atendeeCount: number
+
   photos: Photo[] = []
+
+  atendeeCount: number
+  likeCount: number
 
   static fromEntity(tour: Tour): TourListOutput {
 
+    const likeCount = tour.likes.length;
+    const atendeeCount = tour.atendees.length;
+
+    delete tour.atendees;
+    delete tour.photos;
+    delete tour.comments;
+    delete tour.likes;
+    delete tour.ratings;
+    
+    delete tour.approvalStatus;
+    
     const res: TourListOutput = {
       ...tour,
-      likeCount: tour.likes.length,
-      atendeeCount: tour.atendees.length,
+
+      likeCount,
+      atendeeCount,
     }
 
     return res;
   }
-  
+
 }

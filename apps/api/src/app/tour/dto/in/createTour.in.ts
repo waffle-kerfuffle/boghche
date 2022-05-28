@@ -6,10 +6,10 @@ import { DestinationType } from "../../models/DestinationType"
 
 export class CreateTourInput {
 
-  @ApiProperty()
+  @ApiProperty({ example: 'تور پاتایا' })
   title: string
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ example: 'بسیار هیجان انگیز' })
   description?: string
 
   @ApiPropertyOptional()
@@ -33,16 +33,16 @@ export class CreateTourInput {
   @ApiProperty({ description: 'مدت زمان' })
   duration: Date
 
-  @ApiProperty({ description: 'قیمت' })
+  @ApiProperty({ description: 'قیمت', example: 69000 })
   price: number
 
-  @ApiProperty({ description: 'ظرفیت' })
+  @ApiProperty({ description: 'ظرفیت', example: 20 })
   capacity: number
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ description: 'وضعیت تایید' , example: 0 } )
   approvalStatus: ApprovalStatus = ApprovalStatus.pending
 
-  @ApiProperty()
+  @ApiProperty({ description: 'آی دی شرکت', example: 1 })
   organizationId: number
 
 }
