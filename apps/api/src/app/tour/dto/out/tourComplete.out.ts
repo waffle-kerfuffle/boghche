@@ -34,10 +34,16 @@ export class TourCompleteOutput {
 
   static fromEntity(tour: Tour): TourCompleteOutput {
 
-    const sumRating: number = tour.ratings.reduceRight<number>((acc, current) => acc + current.score, 0);
-    const averageRating: string = (sumRating / (tour.ratings.length || 1)).toFixed(1);
+    // const sumRating: number = tour.ratings.reduceRight<number>((acc, current) => acc + current.score, 0);
+    // const averageRating: string = (sumRating / (tour.ratings.length || 1)).toFixed(1);
 
-    const likeCount: number = tour.likes.length;
+    // const likeCount: number = tour.likes.length;
+
+
+    const sumRating: number = 0;
+    const averageRating: string = '';
+
+    const likeCount: number = 0;
     delete tour.likes;
 
     const res: TourCompleteOutput = { 

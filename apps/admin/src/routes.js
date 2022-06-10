@@ -4,6 +4,20 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
+//Leaders
+const Leaders = React.lazy(() => import('./views/leaders/Leader'))
+//CreateLeader
+const CreateLeader = React.lazy(() => import('./views/leaders/CreateLeader'))
+
+//Trips
+const Trips = React.lazy(() => import('./views/trips/Trip'))
+//CreateTrip
+const CreateTrip = React.lazy(() => import('./views/trips/CreateTrip'))
+
+///Details
+const Details = React.lazy(() => import('./views/details/Details'))
+
+
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -52,7 +66,13 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+  { path: '/dashboard', name: 'داشبورد', element: Dashboard },
+  { path: '/leaders', name: 'لیدرها', element: Leaders },
+  { path: '/CreateLeader', name: 'افزورن لیدر جدید', element: CreateLeader },
+  { path: '/trips', name: 'تورها', element: Trips },
+  { path: '/CreateTrip', name: 'افزورن تور جدید', element: CreateTrip },
+  { path: '/Details', name: 'جزئیات', element: Details },
+
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },

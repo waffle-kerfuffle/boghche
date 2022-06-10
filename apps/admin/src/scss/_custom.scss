@@ -1,1 +1,40 @@
 // Here you can add other styles
+@font-face {
+    font-family: 'Sahel';
+    src: url('../assets/Fonts/Sahel.woff');
+    src: url('../assets/Fonts/Sahel.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+font-family: Sahel;
+a{
+    text-decoration: none;
+}
+}
+.bg-orange{
+background-color: #ffa254;
+}
+.bg-lightPrimary{
+    background-color: rgba(198, 196, 232, 0.995);
+}
+.pagination {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    justify-content: center !important;
+  }
+  .was-validated .form-control:valid, .form-control.is-valid{
+    background-image: none !important;
+  }
+  .was-validated .form-control:invalid, .form-control.is-invalid {
+    background-image: none !important; 
+  }
+  table{
+      td{
+          justify-content: center !important;
+          text-align: center !important;
+      }
+    
+  }
+
+  
