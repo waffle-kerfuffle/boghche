@@ -25,6 +25,7 @@
     "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.0.3",
     "@nestjs/websockets": "^8.4.5",
+    "@types/axios": "^0.14.0",
     "@types/socket.io": "^3.0.2",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",

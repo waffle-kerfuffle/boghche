@@ -46,7 +46,7 @@ export class TourService {
 
   async findTour(findTourArgs: FindTourInput): Promise<Tour> {
 
-    const tour = await this.tourRepo.findOne(findTourArgs);
+    const tour = await this.tourRepo.findOne(findTourArgs, { relations: ["organization"] });
     return tour;
   }
 

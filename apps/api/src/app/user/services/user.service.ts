@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(
     @InjectRepository(User)
-    private userRepo: Repository<User>
+    public readonly userRepo: Repository<User>
   ) { }
 
   // #region CRUD

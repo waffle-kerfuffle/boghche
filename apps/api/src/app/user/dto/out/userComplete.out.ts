@@ -1,3 +1,9 @@
+import { Organization } from "../../../organization/model/organization.entity"
+import { Heart } from "../../../rating/models/heart.entity"
+import { Opinion } from "../../../rating/models/opinion.entity"
+import { Rating } from "../../../rating/models/rating.entity"
+import { Photo } from "../../../upload/models/photo.entity"
+import { Role } from "../../models/role.enum"
 import { User } from "../../models/user.entity"
 
 export class UserComplete {
@@ -6,19 +12,34 @@ export class UserComplete {
 
   name: string
 
+  bio?: string
+
+  pass: string
+
   avatarUrl: string
 
   telno: string
 
-  constructor({ id, name, avatarUrl, telno }: UserComplete) {
-    this.id = id;
-    this.name = name;
-    this.avatarUrl = avatarUrl;
-    this.telno = telno;
-  }
+  roles: Role[] = []
 
-  static fromEntity(user: User): UserComplete {
-    return new UserComplete({...user})
+  gallery: Photo[]
+
+  authoredComments: Opinion[]
+
+  authoredLikes: Heart[]
+
+  authoredRatings: Rating[]
+
+  organization?: Organization
+
+
+  public static fromEntity(user: User): UserComplete {
+
+    const res: UserComplete = {
+      ...user
+    }
+
+    return res;
   }
 
 }

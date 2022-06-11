@@ -26,22 +26,31 @@ import {
 } from '@coreui/react';
 import DeleteModal from '../Modal/DeleteModal';
 
-const Tables = ({ tData, tLable, url,type}) => {
-  console.log('type in table:',type)
+/**
+ * @param { {serviceMethod: Function } } param0 
+ */
+const Tables = ({ serviceMethod, tData, tLable, type }) => {
+
+  console.log('type in table:', type)
   const [users, setUsers] = useState([])
   ///delete modal show/hide
   const [visible, setVisible] = useState(false)
   let rowDetail;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios(url);
-      setUsers(data)
-    }
-    setTimeout(() => {
-      fetchData()
-    }, 2000)
-  }, [setUsers])
+  useEffect(async () => {
+
+    // const fetchData = async () => {
+    //   const { data } = await axios(url);
+    //   setUsers(data)
+    // }
+
+    // fetchData()
+    
+    const newData = await serviceMethod();
+    setUsers(newData);
+
+  }, [])
+
   const columns = []
   let index;
 
@@ -100,7 +109,7 @@ const Tables = ({ tData, tLable, url,type}) => {
               // clickableRows
               columns={columns}
               //itemsPerPageSelect
-             // itemsPerPage={5}
+              // itemsPerPage={5}
               tableProps={{
                 hover: true,
                 responsive: true,
@@ -119,17 +128,17 @@ const Tables = ({ tData, tLable, url,type}) => {
                 show_details: (item) => {
                   return (
                     <td>
-                      <Link   to="/Details" state={type} >
-                      <CButton
-                        color="primary"
-                        variant="outline"
-                        className='text-center'
-                        size="sm"
-                      >
-                        {'جزییات'}
-                      </CButton>
- </Link>
-                      
+                      <Link to="/Details" state={type} >
+                        <CButton
+                          color="primary"
+                          variant="outline"
+                          className='text-center'
+                          size="sm"
+                        >
+                          {'جزییات'}
+                        </CButton>
+                      </Link>
+
                     </td>
                   )
                 },
@@ -153,11 +162,12 @@ const Tables = ({ tData, tLable, url,type}) => {
                         variant="outline"
                         className='ms-2 text-center'
                         size="sm"
-                        onClick={() => {setVisible(!visible)
-                          
-                        console.log("visible after on click: ", visible);
-                      }}
-                        
+                        onClick={() => {
+                          setVisible(!visible)
+
+                          console.log("visible after on click: ", visible);
+                        }}
+
                       >
                         {'حذف'}
                       </CButton>
@@ -167,23 +177,23 @@ const Tables = ({ tData, tLable, url,type}) => {
               }}
             />
           </CCardBody>
-          
+
         </CCard>
         <CModal visible={visible} onClose={() => setVisible(false)} backdrop={'static'}>
-            <CModalHeader>
-               {/* <CModalTitle>حذف</CModalTitle> */}
-            </CModalHeader>
-            <CModalBody className='text-sm'>
-                آیا از حدف این مورد مطمئن هستید؟
-            </CModalBody>
-            <CModalFooter className='cil-align-left'>
-                <CButton size="sm" color="secondary" className='text-white' onClick={() => setVisible(false)}>
-                    انصراف
-                </CButton>
-                <CButton size="sm" className='text-white' color="danger"> حذف</CButton>
-            </CModalFooter>
+          <CModalHeader>
+            {/* <CModalTitle>حذف</CModalTitle> */}
+          </CModalHeader>
+          <CModalBody className='text-sm'>
+            آیا از حدف این مورد مطمئن هستید؟
+          </CModalBody>
+          <CModalFooter className='cil-align-left'>
+            <CButton size="sm" color="secondary" className='text-white' onClick={() => setVisible(false)}>
+              انصراف
+            </CButton>
+            <CButton size="sm" className='text-white' color="danger"> حذف</CButton>
+          </CModalFooter>
         </CModal>
-     {/* <DeleteModal visible={visible} onClose={() => setVisible(false)} rowDetail={rowDetail}/> */}
+        {/* <DeleteModal visible={visible} onClose={() => setVisible(false)} rowDetail={rowDetail}/> */}
 
       </>
     )

@@ -10,6 +10,13 @@ import { ChatModule } from './chat/chat.module';
 import { UploadModule } from './upload/upload.module';
 import { RatingModule } from './rating/rating.module';
 import { PlaceModule } from './place/place.module';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { jwtConstants } from './user/constants';
+import { LocalStrategy } from './user/local.strategy';
+import { JwtStrategy } from './user/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './user/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -24,6 +31,7 @@ import { PlaceModule } from './place/place.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    PassportModule,
     TourModule,
     OrganizationModule,
     ChatModule,
@@ -33,6 +41,5 @@ import { PlaceModule } from './place/place.module';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [],
 })
 export class AppModule { }

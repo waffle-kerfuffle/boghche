@@ -11,10 +11,13 @@ import {
     CTableRow,
 } from '@coreui/react'
 import Tables from '../base/tables/Tables';
+import { environment } from '../../environments/environment';
 const Leader = () => {
     const tData = {  c1: 'name', c2: 'telno' };
     const tLable ={  c1: 'نام و نام خانوادگی', c2: 'شماره تماس' }
-    const url= "http://localhost:3333/api/user/list";
+    
+    const url= environment.apiUrl + "/user/list";
+    
     return (
         <>
             <div>
