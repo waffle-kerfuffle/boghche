@@ -9,22 +9,38 @@ import * as tripService from '../../services/api/TripService'
 
 const Trip = () => {
 
-    // /**
-    //  * @typedef column
-    //  * @property { string } property
-    //  * @property { label } label
-    //  */
+    /**
+     * @typedef column
+     * @property { string } property
+     * @property { label } label
+     */
     
-    // /** @type { column[] } */
-    // const columns = [
-    //     {
-    //         property: 'title',
-    //         label: "عنوان",
-    //     },
-    // ]
+    /** @type { column[] } */
+    const columnsData = [
+        {
+            property: 'title',
+            label: "عنوان",
+        },
+        {
+            property: 'destinationType',
+            label: "نوع تور",
+        },
+        {
+            property: 'duration',
+            label: "مدت زمان",
+        },
+        {
+            property: 'price',
+            label: "قیمت",
+        },
+        {
+            property: 'capacity',
+            label: "ظرفیت",
+        },
+    ]
     
-    const tData = { c1: 'title', c2: 'destinationType', c3: 'duration', c4: 'price', c5: 'capacity' };
-    const tLable = { c1: 'عنوان', c2: 'نوع تور', c3: 'مدت زمان', c4: 'قیمت', c5: 'ظرفیت' };
+    // const tData = { c1: 'title', c2: 'destinationType', c3: 'duration', c4: 'price', c5: 'capacity' };
+    // const tLable = { c1: 'عنوان', c2: 'نوع تور', c3: 'مدت زمان', c4: 'قیمت', c5: 'ظرفیت' };
 
     return (
     
@@ -34,7 +50,7 @@ const Trip = () => {
                         لیست تورها
                     </CCardHeader>
                     <CCardBody>
-                        <Tables serviceMethod={tripService.list} tData={tData} tLable={tLable} type={'trip'} />
+                        <Tables serviceMethod={tripService.list} columnsData={columnsData} type={'trip'} />
                     </CCardBody>
                 </CCard>
             </div>

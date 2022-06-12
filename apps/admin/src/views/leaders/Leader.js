@@ -6,8 +6,24 @@ import Tables from '../base/tables/Tables';
 import { environment } from '../../environments/environment';
 import * as leaderService from '../../services/api/LeaderService' ;
 const Leader = () => {
-    const tData = {  c1: 'name', c2: 'telno' };
-    const tLable ={  c1: 'نام و نام خانوادگی', c2: 'شماره تماس' }
+
+        /**
+     * @typedef column
+     * @property { string } property
+     * @property { label } label
+     */
+    
+    /** @type { column[] } */
+    const columnsData = [
+        {
+            property: 'name',
+            label: "نام و نام خانوادگی",
+        },
+        {
+            property: 'telno',
+            label: "شماره تماس",
+        },
+    ]
     
     const url= environment.apiUrl + "/user/list";
     
@@ -18,7 +34,7 @@ const Leader = () => {
                         لیست لیدرها
                     </CCardHeader>
                     <CCardBody>
-                                <Tables serviceMethod={leaderService.list} tData={tData}  tLable={tLable} url={url} type={'leader'}/>
+                                <Tables  serviceMethod={leaderService.list} columnsData={columnsData} url={url} type={'leader'}/>
                     </CCardBody>
                 </CCard>
             </div>

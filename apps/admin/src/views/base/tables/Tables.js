@@ -27,11 +27,15 @@ import {
 import DeleteModal from "../Modal/DeleteModal";
 
 /**
- * @param { {serviceMethod: Function } } param0
+ * @typedef ColumnDef
+ * @property {string} property
+ * @property {string} label
  */
-const Tables = ({ serviceMethod, tData, tLable, type }) => {
-  
-  console.log("type in table:", type);
+
+/**
+ * @param { {serviceMethod: Function , columnsData: ColumnDef[] } } param0
+ */
+const Tables = ({ serviceMethod, columnsData, type }) => {
   const [users, setUsers] = useState([]);
   ///delete modal show/hide
   const [visible, setVisible] = useState(false);
@@ -43,12 +47,10 @@ const Tables = ({ serviceMethod, tData, tLable, type }) => {
     };
 
     fetchData();
-    
   }, [serviceMethod]);
 
   const columns = [];
   let index;
-
   index = {
     key: "index",
     name: "index",
@@ -59,16 +61,15 @@ const Tables = ({ serviceMethod, tData, tLable, type }) => {
     _props: { color: "primary", className: "fw-semibold text-center" },
   };
   columns.push(index);
-  for (let i = 1; i <= Object.keys(tData).length; i++) {
-    let element = {
-      key: tData["c" + i],
-      name: tData["c" + i],
-      label: tLable["c" + i],
 
+  columns.push(
+    ...columnsData.map((element) => ({
+      key: element.property,
+      name: element.property,
+      label: element.label,
       _props: { color: "primary", className: "fw-semibold text-center" },
-    };
-    columns.push(element);
-  }
+    }))
+  );
   columns.push({
     key: "show_details",
     label: "جزئیات",
