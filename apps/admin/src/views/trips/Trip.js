@@ -1,18 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Formik, Field, Form } from 'formik';
 import {
-    CCard, CCardBody, CCardHeader, CRow, CTable,
-    CTableBody,
-    CTableCaption,
-    CTableDataCell,
-    CTableHead,
-    CTableHeaderCell,
-    CTableRow,
+    CCard, CCardBody, CCardHeader
 } from '@coreui/react'
 import Tables from '../base/tables/Tables';
 
-import * as tourService from '../../services/api/tourService' ;
+//import * as tourService from '../../services/api/tourService' ;
+import * as tripService from '../../services/api/TripService'
 
 const Trip = () => {
 
@@ -34,18 +27,18 @@ const Trip = () => {
     const tLable = { c1: 'عنوان', c2: 'نوع تور', c3: 'مدت زمان', c4: 'قیمت', c5: 'ظرفیت' };
 
     return (
-        <>
+    
             <div>
                 <CCard>
                     <CCardHeader>
                         لیست تورها
                     </CCardHeader>
                     <CCardBody>
-                        <Tables serviceMethod={tourService.list} tData={tData} tLable={tLable} type={'trip'} />
+                        <Tables serviceMethod={tripService.list} tData={tData} tLable={tLable} type={'trip'} />
                     </CCardBody>
                 </CCard>
             </div>
-        </>
+        
     );
 };
 

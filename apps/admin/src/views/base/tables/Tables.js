@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { CSmartTable } from '@coreui/react-pro';
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { CSmartTable } from "@coreui/react-pro";
+import { Link } from "react-router-dom";
 import {
   CCard,
   CCardBody,
@@ -23,75 +23,69 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
-} from '@coreui/react';
-import DeleteModal from '../Modal/DeleteModal';
+} from "@coreui/react";
+import DeleteModal from "../Modal/DeleteModal";
 
 /**
- * @param { {serviceMethod: Function } } param0 
+ * @param { {serviceMethod: Function } } param0
  */
 const Tables = ({ serviceMethod, tData, tLable, type }) => {
-
-  console.log('type in table:', type)
-  const [users, setUsers] = useState([])
+  
+  console.log("type in table:", type);
+  const [users, setUsers] = useState([]);
   ///delete modal show/hide
-  const [visible, setVisible] = useState(false)
-  let rowDetail;
+  const [visible, setVisible] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const newData = await serviceMethod();
+      setUsers(newData);
+    };
 
-    // const fetchData = async () => {
-    //   const { data } = await axios(url);
-    //   setUsers(data)
-    // }
-
-    // fetchData()
+    fetchData();
     
-    const newData = await serviceMethod();
-    setUsers(newData);
+  }, [serviceMethod]);
 
-  }, [])
-
-  const columns = []
+  const columns = [];
   let index;
 
   index = {
-    key: 'index',
-    name: 'index',
-    label: 'ردیف',
+    key: "index",
+    name: "index",
+    label: "ردیف",
     filter: false,
     sorter: false,
-    _style: { width: '6%' },
-    _props: { color: 'primary', className: 'fw-semibold text-center' },
-  }
+    _style: { width: "6%" },
+    _props: { color: "primary", className: "fw-semibold text-center" },
+  };
   columns.push(index);
   for (let i = 1; i <= Object.keys(tData).length; i++) {
-    let element =
-    {
-      key: tData['c' + i],
-      name: tData['c' + i],
-      label: tLable['c' + i],
+    let element = {
+      key: tData["c" + i],
+      name: tData["c" + i],
+      label: tLable["c" + i],
 
-      _props: { color: 'primary', className: 'fw-semibold text-center' },
-    }
-    columns.push(element)
+      _props: { color: "primary", className: "fw-semibold text-center" },
+    };
+    columns.push(element);
   }
   columns.push({
-    key: 'show_details',
-    label: 'جزئیات',
+    key: "show_details",
+    label: "جزئیات",
     filter: false,
     sorter: false,
-    _props: { color: 'primary', className: 'fw-semibold text-center' },
-  })
+    _props: { color: "primary", className: "fw-semibold text-center" },
+  });
   columns.push({
-    key: 'show_operations',
-    label: 'عملیات',
+    key: "show_operations",
+    label: "عملیات",
     filter: false,
     sorter: false,
-    _style: { width: '150px' },
-    _props: { color: 'primary', className: 'fw-semibold text-center' },
-  })
+    _style: { width: "150px" },
+    _props: { color: "primary", className: "fw-semibold text-center" },
+  });
 
-  if (users.length != 0) {
+  if (users.length !== 0) {
     return (
       <>
         <CCard>
@@ -100,8 +94,10 @@ const Tables = ({ serviceMethod, tData, tLable, type }) => {
               items={users}
               pagination
               noItemsLabel="موردی یافت نشد"
-
-              itemsPerPageSelect={{ label: 'تعداد در هر صفحه', values: [5, 10, 20, 50] }}
+              itemsPerPageSelect={{
+                label: "تعداد در هر صفحه",
+                values: [5, 10, 20, 50],
+              }}
               //tableFilter
               columnFilter
               //activePage={3}
@@ -115,97 +111,105 @@ const Tables = ({ serviceMethod, tData, tLable, type }) => {
                 responsive: true,
               }}
               paginationProps={{
-                itemsPerPageSelect: { label: 'تعداد:', values: [5, 10, 20, 50] }
+                itemsperpageselect: {
+                  label: "تعداد:",
+                  values: [5, 10, 20, 50],
+                },
               }}
               scopedColumns={{
                 index: (item) => {
-                  return (
-                    <td>
-                      {item._id + 1}
-                    </td>
-                  )
+                  return <td>{item._id + 1}</td>;
                 },
                 show_details: (item) => {
                   return (
                     <td>
-                      <Link to="/Details" state={type} >
+                      <Link to="/Details" state={type}>
                         <CButton
                           color="primary"
                           variant="outline"
-                          className='text-center'
+                          className="text-center"
                           size="sm"
                         >
-                          {'جزییات'}
+                          {"جزییات"}
                         </CButton>
                       </Link>
-
                     </td>
-                  )
+                  );
                 },
                 show_operations: (item) => {
                   return (
-                    <td >
-
+                    <td>
                       <CButton
                         color="success"
                         variant="outline"
-                        className='me-2 text-center'
+                        className="me-2 text-center"
                         size="sm"
                         onClick={() => {
                           //toggleDetails(item._id)
                         }}
                       >
-                        {'تایید'}
+                        {"تایید"}
                       </CButton>
                       <CButton
                         color="danger"
                         variant="outline"
-                        className='ms-2 text-center'
+                        className="ms-2 text-center"
                         size="sm"
                         onClick={() => {
-                          setVisible(!visible)
+                          setVisible(!visible);
 
                           console.log("visible after on click: ", visible);
                         }}
-
                       >
-                        {'حذف'}
+                        {"حذف"}
                       </CButton>
                     </td>
-                  )
+                  );
                 },
               }}
             />
           </CCardBody>
-
         </CCard>
-        <CModal visible={visible} onClose={() => setVisible(false)} backdrop={'static'}>
-          <CModalHeader>
-            {/* <CModalTitle>حذف</CModalTitle> */}
-          </CModalHeader>
-          <CModalBody className='text-sm'>
+        <CModal
+          visible={visible}
+          onClose={() => setVisible(false)}
+          backdrop={"static"}
+        >
+          <CModalHeader>{/* <CModalTitle>حذف</CModalTitle> */}</CModalHeader>
+          <CModalBody className="text-sm">
             آیا از حدف این مورد مطمئن هستید؟
           </CModalBody>
-          <CModalFooter className='cil-align-left'>
-            <CButton size="sm" color="secondary" className='text-white' onClick={() => setVisible(false)}>
+          <CModalFooter className="cil-align-left">
+            <CButton
+              size="sm"
+              color="secondary"
+              className="text-white"
+              onClick={() => setVisible(false)}
+            >
               انصراف
             </CButton>
-            <CButton size="sm" className='text-white' color="danger"> حذف</CButton>
+            <CButton size="sm" className="text-white" color="danger">
+              {" "}
+              حذف
+            </CButton>
           </CModalFooter>
         </CModal>
         {/* <DeleteModal visible={visible} onClose={() => setVisible(false)} rowDetail={rowDetail}/> */}
-
       </>
-    )
-  }
-  else {
+    );
+  } else {
     return (
       <CButton disabled>
-        <CSpinner component="span" size="sm" variant="grow" aria-hidden="true" />
+        <CSpinner
+          component="span"
+          size="sm"
+          variant="grow"
+          aria-hidden="true"
+        />
         در حال دریافت اطلاعات..
       </CButton>
-    )
+    );
   }
-}
+};
 
-export default Tables
+export default Tables;
